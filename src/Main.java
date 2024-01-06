@@ -43,6 +43,27 @@ public class Main {
         }
     }
 
+    public void withdrawFunds(String accountNumber,double amount){
+        int accountIndex = findAccountIndex(accountNumber);
+
+        if(accountIndex !=-1){
+            accountBalance[accountIndex] -= amount;
+            System.out.println("withdraw successful. Current Balance: " + accountBalance[accountIndex]);
+        }else{
+            System.out.println("Invalid account number!");
+        }
+    }
+
+    public void checkoutbalance(String accountNumber){
+        int accountIndex = findAccountIndex(accountNumber);
+
+        if(accountIndex !=-1){
+            System.out.println("Your Balance: " + accountBalance[accountIndex]);
+        }else{
+            System.out.println("Invalid account number!");
+        }
+    }
+
    public int findAccountIndex(String accountNumber){
         for(int i=0;i<numberOFAccounts;i++){
             if(accountNumbers[i].equals(accountNumber)){
@@ -56,6 +77,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Main main = new Main();
+
+        String accountNumber;
+        double amount;
+
         while(true) {
             System.out.println("Welcome to our bank");
             System.out.println("1. Create account");
@@ -74,10 +99,22 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Enter your account number: ");
-                    String accountNumber = scanner.next();
+                    accountNumber = scanner.next();
                     System.out.println("Enter the amount to deposit: ");
-                    double amount = scanner.nextDouble();
+                    amount = scanner.nextDouble();
                     main.depositFunds(accountNumber,amount);
+                    break;
+                case 3:
+                    System.out.println("Enter your account number: ");
+                    accountNumber = scanner.next();
+                    System.out.println("Enter the amount to deposit: ");
+                    amount = scanner.nextDouble();
+                    main.withdrawFunds(accountNumber,amount);
+                    break;
+                case 4:
+                    System.out.println("Enter your account number: ");
+                    accountNumber = scanner.next();
+                    main.checkoutbalance(accountNumber);
                     break;
                 case 5:
                     System.out.println("Exiting the banking system.");
